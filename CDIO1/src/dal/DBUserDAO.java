@@ -8,13 +8,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class DBUserDAO implements IUserDAO {
-    DatabaseIO db = new DatabaseIO("root", "root", "localhost");
-
+    //DatabaseIO db = new DatabaseIO("root", "root", "localhost");
+    DatabaseIO db = new DatabaseIO("C:/Users/blued/Documents/Github repos/CDIO1_2/CDIO1/test.db");
     @Override
     public UserDTO getUser(int userId) throws DALException {
-        db.Connect();
-        db.Query("use CDIO1");
-        ResultSet rs = db.Query("SELECT * FROM userdto where userID="+userId);
+        db.connect();
+        //db.query("use CDIO1");
+        ResultSet rs = db.query("SELECT * FROM userdto where userID="+userId);
         UserDTO user = new UserDTO();
         try {
             rs.next();
@@ -24,20 +24,20 @@ public class DBUserDAO implements IUserDAO {
             user.addRole(rs.getString("roles"));
             rs.close();
         } catch (SQLException e) {
-            db.CloseConnection();
+            db.closeConnection();
             e.printStackTrace();
         }
 
-        db.CloseConnection();
+        db.closeConnection();
         return user;
     }
 
     @Override
     public List<UserDTO> getUserList() throws DALException {
-        db.Connect();
-        db.Query("use userdto");
-        ResultSet rs = db.Query("SELECT * FROM userdto");
-        db.CloseConnection();
+        db.connect();
+        //db.query("use userdto");
+        ResultSet rs = db.query("SELECT * FROM userdto");
+        db.closeConnection();
         List<UserDTO> userList = null;
         try {
             while (rs.next()) {
@@ -58,11 +58,11 @@ public class DBUserDAO implements IUserDAO {
 
     @Override
     public void createUser(UserDTO user) throws DALException {
-        db.Connect();
-        db.Query("use cdio1");
-        db.Update("delete from userdto where userID="+user.getUserId());
-        db.Update("insert into userdto (userID, userName, ini, cpr, password, roles) VALUE ('" + user.getUserId() + "','" + user.getUserName() + "','" + user.getIni() + "','123456-7890','hej123','" + user.getRoles().get(0) + "')");
-        db.CloseConnection();
+        db.connect();
+        //db.query("use cdio1");
+        db.update("delete from userdto where userID="+user.getUserId());
+        db.insert(user.getUserId(),user.getUserName(),user.getIni(),"2138-231","1234",user.getRoles().get(0));
+        db.closeConnection();
     }
 
     @Override
