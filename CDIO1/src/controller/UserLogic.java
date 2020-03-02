@@ -84,7 +84,7 @@ public class UserLogic {
                 case 3:
                     try{
                         String newPassword = t.inputString("Skriv nyt kodeord: ");
-                        f.verifyPassword(newPassword);
+                        f.verifyPassword(userDTO, newPassword);
                         userDTO.setPassword(newPassword);
                         
                     }catch(Exception e) {

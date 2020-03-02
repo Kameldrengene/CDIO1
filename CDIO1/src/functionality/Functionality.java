@@ -26,7 +26,7 @@ public class Functionality implements IFunctionality {
         return IDs;
     }
     
-    public boolean verify(UserDTO user, String pass) throws Exception {
+    public boolean verifyPassword(UserDTO user, String pass) throws Exception {
         if (pass.length() < 6 || pass.length() > 50){ // length error
             throw new Exception("\n" + "length error");
         }

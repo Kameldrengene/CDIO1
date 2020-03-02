@@ -5,7 +5,6 @@ import dal.UserDAOnonPersistant;
 import functionality.Functionality;
 import functionality.IFunctionality;
 import tui.TUI;
-import passwordVerifier.PasswordVerifier;
 import controller.UserLogic;
 import functionality.Functionality;
 
