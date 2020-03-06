@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class DatabaseIOTest {
     public static void main(String[] args) {
         //DatabaseIO db = new DatabaseIO("root","root","localhost");
-        DatabaseIO db = new DatabaseIO("C:/Users/blued/Documents/Github repos/CDIO1_2/CDIO1/test.db");
+        DatabaseIO db = new DatabaseIO("../CDIO1/test.db");
             db.connect();
 //            db.update("CREATE DATABASE CDIO_DB_TEST;");
 ////            db.update("DROP DATABASE cdio_db_test;");
