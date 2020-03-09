@@ -5,6 +5,8 @@ import dto.UserDTO;
 import functionality.IFunctionality;
 import tui.TUI;
 
+import java.util.List;
+
 public class UserLogic {
     
     private TUI t;
@@ -47,8 +49,10 @@ public class UserLogic {
     }
     
     private void createUser(){
+
         try {
-            d.createUser(t.createUser());
+            int lastId = d.getSerialisering().get(d.getSerialisering().size()-1).getUserId();
+            d.createUser(t.createUser(lastId));
         }catch (IUserDAO.DALException e){
             System.out.println("\n" + e.getMessage());
         }
