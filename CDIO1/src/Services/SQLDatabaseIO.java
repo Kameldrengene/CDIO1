@@ -13,7 +13,7 @@ public class SQLDatabaseIO {
     private Statement stmt = null;
 
 
-    public DatabaseIO(String USER, String PASSWORD, String URL, int PORT) {
+    public SQLDatabaseIO(String USER, String PASSWORD, String URL, int PORT) {
         this.USER = USER;
         this.PASS = PASSWORD;
         this.DatabaseURL = "jdbc:mysql://" + URL + ":"+PORT+"/";

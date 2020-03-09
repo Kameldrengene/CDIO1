@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserDAOSQL implements IUserDAO {
-    DatabaseIO db = new DatabaseIO("kamel", "dreng", "runerne.dk",8003);
+    SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk",8003);
 
     @Override
     public UserDTO getUser(int userId) throws DALException {

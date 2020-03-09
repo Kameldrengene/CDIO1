@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class DatabaseIOTest {
     public static void main(String[] args) {
-        DatabaseIO db = new DatabaseIO("root","root","localhost",3306);{
+        SQLDatabaseIO db = new SQLDatabaseIO("root","root","localhost",3306);{
             db.connect();
             db.setDB("university");
             db.update("CREATE DATABASE CDIO_DB_TEST;");
