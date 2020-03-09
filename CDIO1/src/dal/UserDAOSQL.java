@@ -8,13 +8,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserDAOSQL implements IUserDAO {
-    DatabaseIO db = new DatabaseIO("root", "root", "localhost");
+    DatabaseIO db = new DatabaseIO("kameldrenge", "Cea9YS0ON6lwQmx", "db4free.net");
 
     @Override
     public UserDTO getUser(int userId) throws DALException {
-        db.Connect();
-        db.Query("use CDIO1");
-        ResultSet rs = db.Query("SELECT * FROM userdto where userID="+userId);
+        db.connect();
+        ResultSet rs = db.query("SELECT * FROM userdto where userID="+userId);
         UserDTO user = new UserDTO();
         try {
             rs.next();
@@ -24,20 +23,20 @@ public class UserDAOSQL implements IUserDAO {
             user.addRole(rs.getString("roles"));
             rs.close();
         } catch (SQLException e) {
-            db.CloseConnection();
+            db.close();
             e.printStackTrace();
         }
 
-        db.CloseConnection();
+        db.close();
         return user;
     }
 
     @Override
     public List<UserDTO> getSerialisering() throws DALException {
-        db.Connect();
-        db.Query("use userdto");
-        ResultSet rs = db.Query("SELECT * FROM userdto");
-        db.CloseConnection();
+        db.connect();
+        db.query("use userdto");
+        ResultSet rs = db.query("SELECT * FROM userdto");
+        db.close();
         List<UserDTO> userList = null;
         try {
             while (rs.next()) {
