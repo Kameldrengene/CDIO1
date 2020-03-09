@@ -31,7 +31,7 @@ public class TUI {
         while(true){
             choice = inputNumber();
             
-            if(choice < 1 || choice > menuItems.length+1)
+            if(choice < 1 || choice > menuItems.length)
                 System.out.println("\n" + "Indtast venligst et nummer fra listen:");
             else
                 break;
