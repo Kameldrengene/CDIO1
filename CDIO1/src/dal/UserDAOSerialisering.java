@@ -3,21 +3,21 @@ package dal;
 import Data.MapSerialisering;
 import dto.UserDTO;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAOSerialisering implements IUserDAO{
     
     MapSerialisering data;
+
     
     public UserDAOSerialisering(){
         data = readUserList();
-        if(data ==null){
-            writeUserList(new MapSerialisering());
+        if(data==null){
+            MapSerialisering newList = new MapSerialisering();
+            data= newList;
+            writeUserList(data);
             readUserList();
         }
     }

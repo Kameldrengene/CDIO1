@@ -5,9 +5,10 @@ import dto.UserDTO;
 import java.util.List;
 
 public class Functionality implements IFunctionality {
-    
     //                        !   +   -   .   =   ?   _
     private int[] specials = {33, 43, 45, 46, 61, 63, 95};
+
+
     
     public boolean isUserIDPresent(int ID, int[] IDs){
         

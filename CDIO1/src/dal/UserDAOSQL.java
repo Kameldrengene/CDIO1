@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserDAOSQL implements IUserDAO {
-    SQLDatabaseIO db = new SQLDatabaseIO("kameldrenge", "Cea9YS0ON6lwQmx", "db4free.net");
+    DatabaseIO db = new DatabaseIO("kamel", "dreng", "runerne.dk",8003);
 
     @Override
     public UserDTO getUser(int userId) throws DALException {
@@ -58,7 +58,6 @@ public class UserDAOSQL implements IUserDAO {
     @Override
     public void createUser(UserDTO user) throws DALException {
         db.connect();
-        db.update("delete from userdto where userID=" + user.getUserId());
         db.update("insert into userdto (userID, userName, ini, cpr, password, roles) VALUE ('" + user.getUserId() + "','" + user.getUserName() + "','" + user.getIni() + "','" + user.getCpr() + "','" + user.getPassword() + "','" + user.getRoles().get(0) + "')");
         db.close();
     }
@@ -87,6 +86,8 @@ public class UserDAOSQL implements IUserDAO {
 
     @Override
     public void deleteUser(int userId) throws DALException {
-
+        db.connect();
+        db.update("delete from userdto where userID=" + userId);
+        db.close();
     }
 }

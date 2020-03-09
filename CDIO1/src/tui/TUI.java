@@ -140,7 +140,7 @@ public class TUI {
         }
     }
 
-    public UserDTO createUser() {
+    public UserDTO createUser(int id) {
 
         UserDTO newuser = new UserDTO();
 
@@ -154,9 +154,9 @@ public class TUI {
 
         addRolesToUser(newuser);
 
-        newuser.setUserId(UserDTO.getCounter());
+        newuser.setUserId(id+1);
 
-        UserDTO.setCounter(UserDTO.getCounter()+1);
+        UserDTO.setCounter(id+1);
 
         return newuser;
     }

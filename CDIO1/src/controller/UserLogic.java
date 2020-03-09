@@ -5,6 +5,8 @@ import dto.UserDTO;
 import functionality.IFunctionality;
 import tui.TUI;
 
+import java.util.List;
+
 public class UserLogic {
     
     private TUI tui;
@@ -49,8 +51,15 @@ public class UserLogic {
     
     //Asks tui to create a new user and dao to save it
     private void createUser(){
+
         try {
-            dao.createUser(tui.createUser());
+            if(dao.getData().size()==0){
+                dao.createUser(tui.createUser(10));
+            }
+             else {
+                int lastId = dao.getData().get(dao.getData().size() - 1).getUserId();
+                dao.createUser(tui.createUser(lastId));
+            }
         }catch (IUserDAO.DALException e){
             System.out.println("\n" + e.getMessage());
         }

@@ -7,10 +7,11 @@ import java.sql.SQLException;
 
 public class DatabaseIOTest {
     public static void main(String[] args) {
-        SQLDatabaseIO db = new SQLDatabaseIO("root","root","localhost");{
+        DatabaseIO db = new DatabaseIO("root","root","localhost",3306);{
+            db.connect();
+            db.setDB("university");
             db.update("CREATE DATABASE CDIO_DB_TEST;");
             db.update("DROP DATABASE cdio_db_test;");
-            db.query("use university;");
             ResultSet query = db.query("SELECT * FROM student;");
             try {
                 while(query.next()){
@@ -24,7 +25,7 @@ public class DatabaseIOTest {
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
-            }
+            } db.close();
         }
     }
 }

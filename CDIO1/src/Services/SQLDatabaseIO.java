@@ -13,12 +13,14 @@ public class SQLDatabaseIO {
     private Statement stmt = null;
 
 
-    public SQLDatabaseIO(String USER, String PASSWORD, String URL) {
+    public DatabaseIO(String USER, String PASSWORD, String URL, int PORT) {
         this.USER = USER;
         this.PASS = PASSWORD;
-        this.DatabaseURL = "jdbc:mysql://" + URL + ":3306/";
+        this.DatabaseURL = "jdbc:mysql://" + URL + ":"+PORT+"/";
     }
-
+    public void setDB(String db){
+        this.db_name = db;
+    }
     public void connect() {
         if(!connected){
             try {
