@@ -32,7 +32,7 @@ public class UserDAOSQL implements IUserDAO {
     }
 
     @Override
-    public List<UserDTO> getSerialisering() throws DALException {
+    public List<UserDTO> getData() throws DALException {
         db.connect();
         db.query("use userdto");
         ResultSet rs = db.query("SELECT * FROM userdto");

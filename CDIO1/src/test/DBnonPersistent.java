@@ -29,8 +29,8 @@ public class DBnonPersistent {
         try {
             iDAO.createUser(newUser);
             System.out.println(iDAO.getUser(4));
-            for (int i = 0; i <iDAO.getSerialisering().size() ; i++) {
-                System.out.println(iDAO.getSerialisering().get(i));
+            for (int i = 0; i <iDAO.getData().size() ; i++) {
+                System.out.println(iDAO.getData().get(i));
             }
 
 
@@ -41,7 +41,7 @@ public class DBnonPersistent {
     private static void printUsers(IUserDAO iDAO) {
         try {
             System.out.println("Printing users...");
-            List<UserDTO> userList = iDAO.getSerialisering();
+            List<UserDTO> userList = iDAO.getData();
             for (UserDTO userDTO : userList) {
                 System.out.println(userDTO);
             }

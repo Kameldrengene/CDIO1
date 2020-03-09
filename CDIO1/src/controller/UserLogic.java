@@ -5,16 +5,18 @@ import dto.UserDTO;
 import functionality.IFunctionality;
 import tui.TUI;
 
+import java.util.List;
+
 public class UserLogic {
     
-    private TUI t;
-    private IFunctionality f;
-    private IUserDAO d;
+    private TUI tui;
+    private IFunctionality functionality;
+    private IUserDAO dao;
     
-    public UserLogic(TUI t, IFunctionality f, IUserDAO d){
-        this.t = t;
-        this.f = f;
-        this.d = d;
+    public UserLogic(TUI tui, IFunctionality functionality, IUserDAO dao){
+        this.tui = tui;
+        this.functionality = functionality;
+        this.dao = dao;
     }
     
     public void start(){
@@ -24,7 +26,7 @@ public class UserLogic {
         outer:
         while(true){
             
-            choice = t.showMenu("Vælg et menupunkt", "Opret ny bruger", "List brugere", "Ret bruger","Slet bruger", "Afslut program");
+            choice = tui.showMenu("Vælg et menupunkt", "Opret ny bruger", "List brugere", "Ret bruger","Slet bruger", "Afslut program");
     
             switch (choice){
                 case 1:
@@ -47,8 +49,10 @@ public class UserLogic {
     }
     
     private void createUser(){
+
         try {
-            d.createUser(t.createUser());
+            int lastId = dao.getData().get(dao.getData().size()-1).getUserId();
+            dao.createUser(tui.createUser(lastId));
         }catch (IUserDAO.DALException e){
             System.out.println("\n" + e.getMessage());
         }
@@ -56,7 +60,7 @@ public class UserLogic {
     
     private void ListUsers(){
         try {
-            t.listUsers(d.getSerialisering());
+            tui.listUsers(dao.getData());
         } catch (IUserDAO.DALException e) {
             System.out.println("\n" + e.getMessage());
         }
@@ -64,27 +68,27 @@ public class UserLogic {
     
     private void editUser(){
     
-        int id = t.getUserID();
+        int id = tui.getUserID();
         
         try{
             validateID(id);
-            UserDTO userDTO = d.getUser(id);
+            UserDTO userDTO = dao.getUser(id);
             
-            int choice = t.showMenu("Vælg hvad du vil redigere", "Navn", "Brugernavn", "Kodeord", "Roller");
+            int choice = tui.showMenu("Vælg hvad du vil redigere", "Navn", "Brugernavn", "Kodeord", "Roller");
             
             switch (choice){
                 case 1:
-                    String newName = t.inputName();
+                    String newName = tui.inputName();
                     userDTO.setUserName(newName);
                     break;
                 case 2:
-                    String newIni = t.inputInit();
+                    String newIni = tui.inputInit();
                     userDTO.setIni(newIni);
                     break;
                 case 3:
                     try{
-                        String newPassword = t.inputString("Skriv nyt kodeord: ");
-                        f.verifyPassword(userDTO, newPassword);
+                        String newPassword = tui.inputString("Skriv nyt kodeord: ");
+                        functionality.verifyPassword(userDTO, newPassword);
                         userDTO.setPassword(newPassword);
                         
                     }catch(Exception e) {
@@ -92,7 +96,7 @@ public class UserLogic {
                     }
                     break;
                 case 4:
-                    t.addRolesToUser(userDTO);
+                    tui.addRolesToUser(userDTO);
                     break;
             }
             
@@ -106,11 +110,11 @@ public class UserLogic {
     }
     
     private void deleteUser(){
-       int id = t.getUserID();
+       int id = tui.getUserID();
        
        try{
            validateID(id);
-           d.deleteUser(id);
+           dao.deleteUser(id);
        } catch (userIDNotFound e){
            System.out.println("\n" + e.getMessage());
        }catch (IUserDAO.DALException e){
@@ -120,8 +124,8 @@ public class UserLogic {
     
     private void validateID(int ID) throws userIDNotFound{
         try {
-            int[] IDs = f.getUserIDs(d.getSerialisering());
-            if( !(f.isUserIDPresent(ID, IDs)) )
+            int[] IDs = functionality.getUserIDs(dao.getData());
+            if( !(functionality.isUserIDPresent(ID, IDs)) )
                 throw new userIDNotFound("ID'et blev ikke fundet");
         } catch (IUserDAO.DALException e) {
             System.out.println("\n" + e.getMessage());;
