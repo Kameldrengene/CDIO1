@@ -11,8 +11,14 @@ import java.util.List;
 
 public class UserListManager implements IUserDAO{
     UserList userList;
+
     public UserListManager(){
-        userList = readUserList();
+        userList=readUserList();
+        if (userList==null){
+            userList = new UserList();
+            writeUserList(userList);
+        }
+
     }
 
 
