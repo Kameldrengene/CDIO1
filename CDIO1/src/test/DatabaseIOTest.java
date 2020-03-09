@@ -8,11 +8,10 @@ import java.sql.SQLException;
 public class DatabaseIOTest {
     public static void main(String[] args) {
         DatabaseIO db = new DatabaseIO("root","root","localhost");{
-            db.Connect();
-            db.Update("CREATE DATABASE CDIO_DB_TEST;");
-            db.Update("DROP DATABASE cdio_db_test;");
-            db.Query("use university;");
-            ResultSet query = db.Query("SELECT * FROM student;");
+            db.update("CREATE DATABASE CDIO_DB_TEST;");
+            db.update("DROP DATABASE cdio_db_test;");
+            db.query("use university;");
+            ResultSet query = db.query("SELECT * FROM student;");
             try {
                 while(query.next()){
                     System.out.println();
@@ -26,7 +25,6 @@ public class DatabaseIOTest {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            db.CloseConnection();
         }
     }
 }

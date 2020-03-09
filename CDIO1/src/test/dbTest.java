@@ -6,10 +6,10 @@ import dto.UserDTO;
 
 public class dbTest {
     public static void main(String[] args) {
-        //Laver en fil der hedder 5.txt med info herunder og læser den igen og printer initialerne
+        //Laver en userDTO indsætter i database og priter
         UserDTO user = new UserDTO();
         user.setUserId(5);
-        user.setUserName("Johnny");
+        user.setUserName("John");
         user.setIni("JOH");
         user.addRole("Operator");
         user.addRole("Admin");
@@ -18,9 +18,20 @@ public class dbTest {
         try {
             user2.createUser(user);
             userDTO = user2.getUser(5);
+
+        } catch (IUserDAO.DALException e) {
+            System.out.println("No user with that ID");
+            e.printStackTrace();
+        }
+        System.out.println(userDTO.getIni());
+        user.setIni("KAM");
+        try {
+            user2.updateUser(user);
+            userDTO = user2.getUser(5);
         } catch (IUserDAO.DALException e) {
             e.printStackTrace();
         }
+
         System.out.println(userDTO.getIni());
     }
 }
