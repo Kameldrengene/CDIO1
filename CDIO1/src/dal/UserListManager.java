@@ -25,7 +25,7 @@ public class UserListManager implements IUserDAO{
             fileInputStream.close();
             objectInputStream.close();
         }catch (Exception e){
-            System.out.println("filen findes ikke");
+            System.out.println("Filen findes ikke");
         }
         return temp;
     }
@@ -40,7 +40,6 @@ public class UserListManager implements IUserDAO{
         }catch (Exception e){
             System.out.println("Kunne ikke sktive");
         }
-
     }
 
     @Override
@@ -63,7 +62,6 @@ public class UserListManager implements IUserDAO{
             userList.getUsers().put(user.getUserId(), user);
             writeUserList(userList);
         }
-
     }
 
     @Override
@@ -74,7 +72,6 @@ public class UserListManager implements IUserDAO{
         }
         else
             throw new DALException("\n" + "Brugeren eksistet ikke");
-
     }
 
     @Override

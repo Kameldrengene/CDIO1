@@ -2,6 +2,7 @@ import controller.UserLogic;
 import dal.IUserDAO;
 import dal.UserDAO;
 import dal.UserDAOnonPersistant;
+import dal.UserListManager;
 import functionality.Functionality;
 import functionality.IFunctionality;
 import tui.TUI;
@@ -21,7 +22,7 @@ public class Main {
                 new UserLogic(tui, functionality, new UserDAOnonPersistant()).start();
                 break;
             case 2:
-                new UserLogic(tui, functionality, new UserDAO()).start();
+                new UserLogic(tui, functionality, new UserListManager()).start();
                 break;
             case 3:
                 System.out.println("Ikke implementeret endnu");

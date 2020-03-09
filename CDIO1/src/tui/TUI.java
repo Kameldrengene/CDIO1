@@ -87,7 +87,7 @@ public class TUI {
         String cpr = "";
         boolean check = false;
         do {
-            System.out.println("Indtast brugerens CPR-nummer i formattet: DDMMYYxxxx");
+            System.out.println("\n" + "Indtast brugerens CPR-nummer i formattet: DDMMYYxxxx");
             cpr = scan.nextLine();
             if (cpr.length() != 10) {
                 System.out.println("Forkert format");
