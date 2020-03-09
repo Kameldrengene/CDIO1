@@ -1,18 +1,17 @@
 package dal;
 
-import Data.MapnonPersistens;
+import Data.NonPersistent;
 import dto.UserDTO;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.DataFormatException;
 
-public class UserDAOnonPersistant implements IUserDAO {
+public class UserDAONonPersistent implements IUserDAO {
 
-    MapnonPersistens data1;
+    NonPersistent data1;
 
-    public UserDAOnonPersistant() {
-        data1 = new MapnonPersistens();
+    public UserDAONonPersistent() {
+        data1 = new NonPersistent();
 
     }
 
@@ -23,7 +22,7 @@ public class UserDAOnonPersistant implements IUserDAO {
     }
 
     @Override
-    public List<UserDTO> getUserList() throws DALException {
+    public List<UserDTO> getSerialisering() throws DALException {
        return new ArrayList(data1.getUsers().values());
 
     }

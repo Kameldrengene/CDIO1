@@ -56,7 +56,7 @@ public class UserLogic {
     
     private void ListUsers(){
         try {
-            t.listUsers(d.getUserList());
+            t.listUsers(d.getSerialisering());
         } catch (IUserDAO.DALException e) {
             System.out.println("\n" + e.getMessage());
         }
@@ -120,7 +120,7 @@ public class UserLogic {
     
     private void validateID(int ID) throws userIDNotFound{
         try {
-            int[] IDs = f.getUserIDs(d.getUserList());
+            int[] IDs = f.getUserIDs(d.getSerialisering());
             if( !(f.isUserIDPresent(ID, IDs)) )
                 throw new userIDNotFound("ID'et blev ikke fundet");
         } catch (IUserDAO.DALException e) {

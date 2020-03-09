@@ -1,5 +1,6 @@
 package dal;
 
+import Data.Serialisering;
 import dto.UserDTO;
 
 import java.io.FileInputStream;
@@ -9,28 +10,28 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserListManager implements IUserDAO{
-    UserList userList;
-    public UserListManager(){
-        userList = readUserList();
+public class UserDAOSerialisering implements IUserDAO{
+    Serialisering serialisering;
+    public UserDAOSerialisering(){
+        serialisering = readUserList();
     }
 
 
-    public UserList readUserList(){
-        UserList temp = null;
+    public Serialisering readUserList(){
+        Serialisering temp = null;
         try{
             FileInputStream fileInputStream = new FileInputStream("dataobject.ser");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            temp = (UserList) objectInputStream.readObject();
+            temp = (Serialisering) objectInputStream.readObject();
             fileInputStream.close();
             objectInputStream.close();
         }catch (Exception e){
-            System.out.println("filen findes ikke");
+            System.out.println("Filen findes ikke");
         }
         return temp;
     }
 
-    public void writeUserList(UserList savethisList){
+    public void writeUserList(Serialisering savethisList){
         try {
             FileOutputStream fileOutputStream = new FileOutputStream("dataobject.ser");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -40,48 +41,45 @@ public class UserListManager implements IUserDAO{
         }catch (Exception e){
             System.out.println("Kunne ikke sktive");
         }
-
     }
 
     @Override
     public UserDTO getUser(int userId) throws DALException {
-        return userList.getUsers().get(userId);
+        return serialisering.getUsers().get(userId);
     }
 
     @Override
-    public List<UserDTO> getUserList() throws DALException {
-        return new ArrayList(userList.getUsers().values());
+    public List<UserDTO> getSerialisering() throws DALException {
+        return new ArrayList(serialisering.getUsers().values());
 
     }
 
     @Override
     public void createUser(UserDTO user) throws DALException {
-        if (userList.getUsers().containsKey(user.getUserId())){
+        if (serialisering.getUsers().containsKey(user.getUserId())){
             throw new DALException("\n" + "Bruger navn er optaget");
         }
         else {
-            userList.getUsers().put(user.getUserId(), user);
-            writeUserList(userList);
+            serialisering.getUsers().put(user.getUserId(), user);
+            writeUserList(serialisering);
         }
-
     }
 
     @Override
     public void updateUser(UserDTO user) throws DALException {
-        if (userList.getUsers().containsKey(user.getUserId())) {
-            userList.getUsers().replace(user.getUserId(), user);
-            writeUserList(userList);
+        if (serialisering.getUsers().containsKey(user.getUserId())) {
+            serialisering.getUsers().replace(user.getUserId(), user);
+            writeUserList(serialisering);
         }
         else
             throw new DALException("\n" + "Brugeren eksistet ikke");
-
     }
 
     @Override
     public void deleteUser(int userId) throws DALException {
-        if (userList.getUsers().containsKey(userId)) {
-            userList.getUsers().remove(userId);
-            writeUserList(userList);
+        if (serialisering.getUsers().containsKey(userId)) {
+            serialisering.getUsers().remove(userId);
+            writeUserList(serialisering);
         }
         else
             throw new DALException("\n" + "Brugeren eksisterer ikke");

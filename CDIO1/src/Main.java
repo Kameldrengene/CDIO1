@@ -1,12 +1,9 @@
 import controller.UserLogic;
-import dal.IUserDAO;
-import dal.UserDAO;
-import dal.UserDAOnonPersistant;
+import dal.UserDAONonPersistent;
+import dal.UserDAOSerialisering;
 import functionality.Functionality;
 import functionality.IFunctionality;
 import tui.TUI;
-import controller.UserLogic;
-import functionality.Functionality;
 
 public class Main {
     
@@ -18,10 +15,10 @@ public class Main {
         
         switch(choice){
             case 1:
-                new UserLogic(tui, functionality, new UserDAOnonPersistant()).start();
+                new UserLogic(tui, functionality, new UserDAONonPersistent()).start();
                 break;
             case 2:
-                new UserLogic(tui, functionality, new UserDAO()).start();
+                new UserLogic(tui, functionality, new UserDAOSerialisering()).start();
                 break;
             case 3:
                 System.out.println("Ikke implementeret endnu");

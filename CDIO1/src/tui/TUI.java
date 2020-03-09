@@ -1,6 +1,5 @@
 package tui;
 
-import dal.UserDAO;
 import dto.UserDTO;
 
 import java.util.List;
@@ -31,7 +30,7 @@ public class TUI {
         while(true){
             choice = inputNumber();
             
-            if(choice < 1 || choice > menuItems.length+1)
+            if(choice < 1 || choice > menuItems.length)
                 System.out.println("\n" + "Indtast venligst et nummer fra listen:");
             else
                 break;
@@ -87,7 +86,7 @@ public class TUI {
         String cpr = "";
         boolean check = false;
         do {
-            System.out.println("Indtast brugerens CPR-nummer i formattet: DDMMYYxxxx");
+            System.out.println("\n" + "Indtast brugerens CPR-nummer i formattet: DDMMYYxxxx");
             cpr = scan.nextLine();
             if (cpr.length() != 10) {
                 System.out.println("Forkert format");

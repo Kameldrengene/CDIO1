@@ -7,13 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class DBUserDAO implements IUserDAO {
-    DatabaseIO db = new DatabaseIO("kameldrenge", "Cea9YS0ON6lwQmx", "db4free.net");
+public class UserDAOSQL implements IUserDAO {
+    DatabaseIO db = new DatabaseIO("root", "root", "localhost");
 
     @Override
     public UserDTO getUser(int userId) throws DALException {
-        db.connect();
-        ResultSet rs = db.query("SELECT * FROM userdto where userID=" + userId);
+        db.Connect();
+        db.Query("use CDIO1");
+        ResultSet rs = db.Query("SELECT * FROM userdto where userID="+userId);
         UserDTO user = new UserDTO();
         try {
             rs.next();
@@ -23,16 +24,20 @@ public class DBUserDAO implements IUserDAO {
             user.addRole(rs.getString("roles"));
             rs.close();
         } catch (SQLException e) {
+            db.CloseConnection();
             e.printStackTrace();
         }
-        db.close();
+
+        db.CloseConnection();
         return user;
     }
 
     @Override
-    public List<UserDTO> getUserList() throws DALException {
-        db.connect();
-        ResultSet rs = db.query("SELECT * FROM userdto");
+    public List<UserDTO> getSerialisering() throws DALException {
+        db.Connect();
+        db.Query("use userdto");
+        ResultSet rs = db.Query("SELECT * FROM userdto");
+        db.CloseConnection();
         List<UserDTO> userList = null;
         try {
             while (rs.next()) {
@@ -48,7 +53,6 @@ public class DBUserDAO implements IUserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        db.close();
         return userList;
     }
 

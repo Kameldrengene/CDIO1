@@ -7,22 +7,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MapnonPersistens {
+public class NonPersistent {
     Map<Integer , UserDTO> users;
-    public MapnonPersistens(){
+    public NonPersistent(){
         users = new HashMap<>();
         UserDTO volkan = new UserDTO();
         UserDTO mikkel = new UserDTO();
         UserDTO talha = new UserDTO();
-        volkan.setUserId(1);
+        volkan.setUserId(11);
         volkan.addRole("Worker");
         volkan.setUserName("Volkan");
         volkan.setIni("vol");
-        mikkel.setUserId(2);
+        mikkel.setUserId(12);
         mikkel.addRole("Admin");
         mikkel.setUserName("Mikkel");
         mikkel.setIni("mik");
-        talha.setUserId(3);
+        talha.setUserId(13);
         talha.addRole("Admin");
         talha.setUserName("Talha");
         talha.setIni("tal");
