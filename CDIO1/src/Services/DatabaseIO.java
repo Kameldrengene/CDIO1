@@ -18,7 +18,9 @@ public class DatabaseIO {
         this.PASS = PASSWORD;
         this.DatabaseURL = "jdbc:mysql://" + URL + ":"+PORT+"/";
     }
-
+    public void setDB(String db){
+        this.db_name = db;
+    }
     public void connect() {
         if(!connected){
             try {
