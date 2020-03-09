@@ -15,4 +15,8 @@ public class Serialisering implements Serializable {
     public HashMap<Integer, UserDTO> getUsers() {
         return users;
     }
+
+    public void setUsers(HashMap<Integer, UserDTO> users) {
+        this.users = users;
+    }
 }
