@@ -51,7 +51,7 @@ public class UserLogic {
     private void createUser(){
 
         try {
-            int lastId = dao.getSerialisering().get(dao.getSerialisering().size()-1).getUserId();
+            int lastId = dao.getData().get(dao.getData().size()-1).getUserId();
             dao.createUser(tui.createUser(lastId));
         }catch (IUserDAO.DALException e){
             System.out.println("\n" + e.getMessage());
