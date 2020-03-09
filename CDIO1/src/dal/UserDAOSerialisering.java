@@ -14,13 +14,17 @@ public class UserDAOSerialisering implements IUserDAO{
     Serialisering serialisering;
     public UserDAOSerialisering(){
         serialisering = readUserList();
+        if(serialisering==null){
+            writeUserList(new Serialisering());
+            readUserList();
+        }
     }
 
 
     public Serialisering readUserList(){
         Serialisering temp = null;
         try{
-            FileInputStream fileInputStream = new FileInputStream("dataobject.ser");
+            FileInputStream fileInputStream = new FileInputStream("object.ser");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             temp = (Serialisering) objectInputStream.readObject();
             fileInputStream.close();
@@ -33,7 +37,7 @@ public class UserDAOSerialisering implements IUserDAO{
 
     public void writeUserList(Serialisering savethisList){
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream("dataobject.ser");
+            FileOutputStream fileOutputStream = new FileOutputStream("object.ser");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(savethisList);
             fileOutputStream.close();
