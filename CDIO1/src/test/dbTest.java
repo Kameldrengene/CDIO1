@@ -1,7 +1,7 @@
 package test;
 
 import dal.IUserDAO;
-import dal.DBUserDAO;
+import dal.UserDAOSQL;
 import dto.UserDTO;
 
 public class dbTest {
@@ -13,7 +13,7 @@ public class dbTest {
         user.setIni("JOH");
         user.addRole("Operator");
         user.addRole("Admin");
-        DBUserDAO user2 = new DBUserDAO();
+        UserDAOSQL user2 = new UserDAOSQL();
         UserDTO userDTO = new UserDTO();
         try {
             user2.createUser(user);

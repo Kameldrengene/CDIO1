@@ -2,7 +2,7 @@ package test;
 
 import controller.UserLogic;
 import dal.IUserDAO;
-import dal.UserDAOnonPersistant;
+import dal.UserDAONonPersistent;
 import dto.UserDTO;
 import functionality.Functionality;
 import functionality.IFunctionality;
@@ -14,7 +14,7 @@ public class DBnonPersistent {
     public static void main(String[] args) {
         IFunctionality functionality = new Functionality();
         TUI tui = new TUI();
-        IUserDAO iDAO = new UserDAOnonPersistant();
+        IUserDAO iDAO = new UserDAONonPersistent();
         UserDTO newUser = new UserDTO();
         UserLogic userLogic = new UserLogic(tui,functionality,iDAO);
 
@@ -29,8 +29,8 @@ public class DBnonPersistent {
         try {
             iDAO.createUser(newUser);
             System.out.println(iDAO.getUser(4));
-            for (int i = 0; i <iDAO.getUserList().size() ; i++) {
-                System.out.println(iDAO.getUserList().get(i));
+            for (int i = 0; i <iDAO.getSerialisering().size() ; i++) {
+                System.out.println(iDAO.getSerialisering().get(i));
             }
 
 
@@ -41,7 +41,7 @@ public class DBnonPersistent {
     private static void printUsers(IUserDAO iDAO) {
         try {
             System.out.println("Printing users...");
-            List<UserDTO> userList = iDAO.getUserList();
+            List<UserDTO> userList = iDAO.getSerialisering();
             for (UserDTO userDTO : userList) {
                 System.out.println(userDTO);
             }

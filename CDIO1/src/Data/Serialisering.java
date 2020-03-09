@@ -1,13 +1,13 @@
-package dal;
+package Data;
 
 import dto.UserDTO;
 
 import java.io.Serializable;
 import java.util.HashMap;
 
-public class UserList implements Serializable {
+public class Serialisering implements Serializable {
     public HashMap<Integer , UserDTO> users;
-    public UserList(){
+    public Serialisering(){
         users = new HashMap<>();
     }
 

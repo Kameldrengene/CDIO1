@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class DBUserDAO implements IUserDAO {
+public class UserDAOSQL implements IUserDAO {
     DatabaseIO db = new DatabaseIO("root", "root", "localhost");
 
     @Override
@@ -33,7 +33,7 @@ public class DBUserDAO implements IUserDAO {
     }
 
     @Override
-    public List<UserDTO> getUserList() throws DALException {
+    public List<UserDTO> getSerialisering() throws DALException {
         db.Connect();
         db.Query("use userdto");
         ResultSet rs = db.Query("SELECT * FROM userdto");
