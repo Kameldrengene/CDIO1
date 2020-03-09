@@ -14,8 +14,7 @@ public class UserDTO implements Serializable{
 	private String password;
 	private List<String> roles;
 	private static int counter = 11;
-
-
+	
 //TODO Add relevant fields
 	
 	public UserDTO() {

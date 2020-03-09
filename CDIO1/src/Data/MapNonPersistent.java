@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class NonPersistent {
+public class MapNonPersistent {
     Map<Integer , UserDTO> users;
-    public NonPersistent(){
+    public MapNonPersistent(){
         users = new HashMap<>();
         UserDTO volkan = new UserDTO();
         UserDTO mikkel = new UserDTO();
