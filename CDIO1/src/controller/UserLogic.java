@@ -133,6 +133,8 @@ public class UserLogic {
     }
     
     private void deleteUser(){
+        
+        //Input ID
        int id = tui.getUserID();
        
        try{
