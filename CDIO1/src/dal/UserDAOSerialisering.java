@@ -10,12 +10,14 @@ import java.util.List;
 public class UserDAOSerialisering implements IUserDAO{
     
     MapSerialisering data;
-    File dataFile = new File("object.ser");
+
     
     public UserDAOSerialisering(){
         data = readUserList();
-        if(!dataFile.exists()){
-            writeUserList(new MapSerialisering());
+        if(data==null){
+            MapSerialisering newList = new MapSerialisering();
+            data= newList;
+            writeUserList(data);
             readUserList();
         }
     }
