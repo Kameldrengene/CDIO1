@@ -4,6 +4,8 @@ import dal.IUserDAO;
 import dal.UserDAOSQL;
 import dto.UserDTO;
 
+import java.util.List;
+
 public class dbTest {
     public static void main(String[] args) {
         //Laver en userDTO indsætter i database og priter
@@ -16,14 +18,23 @@ public class dbTest {
         UserDAOSQL user2 = new UserDAOSQL();
         UserDTO userDTO = new UserDTO();
         try {
+            List<UserDTO> users = user2.getData();
+            for(int i = 0; i < users.size();i++){
+                System.out.println(users.get(i));
+            }
+        } catch (IUserDAO.DALException e) {
+            e.printStackTrace();
+        }
+        try {
             user2.createUser(user);
-            userDTO = user2.getUser(5);
+            userDTO = user2.getUser(1);
 
         } catch (IUserDAO.DALException e) {
             System.out.println("No user with that ID");
             e.printStackTrace();
         }
         System.out.println(userDTO.getIni());
+        System.out.println(userDTO.getRolesToString());
         user.setIni("KAM");
         try {
             user2.updateUser(user);
@@ -35,7 +46,6 @@ public class dbTest {
         System.out.println(userDTO.getIni());
         try {
             user2.deleteUser(5);
-            System.out.println(user2.getUser(5).getIni());
         } catch (IUserDAO.DALException e) {
             e.printStackTrace();
         }
