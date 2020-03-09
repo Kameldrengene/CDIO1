@@ -1,6 +1,5 @@
 package tui;
 
-import dal.UserDAO;
 import dto.UserDTO;
 
 import java.util.List;

@@ -1,5 +1,4 @@
 import controller.UserLogic;
-import dal.UserDAO;
 import dal.UserDAONonPersistent;
 import dal.UserDAOSerialisering;
 import functionality.Functionality;
