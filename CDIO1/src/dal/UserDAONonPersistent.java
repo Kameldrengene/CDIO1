@@ -27,7 +27,7 @@ public class UserDAONonPersistent implements IUserDAO {
     @Override
     public void createUser(UserDTO user) throws DALException {
         if (data.getUsers().containsKey(user.getUserId())){
-            throw new DALException("\n" + "Bruger navn er optaget");
+            throw new DALException("Bruger navn er optaget");
         }
         else
             data.getUsers().put(user.getUserId(),user);
@@ -38,7 +38,7 @@ public class UserDAONonPersistent implements IUserDAO {
         if (data.getUsers().containsKey(user.getUserId()))
         data.getUsers().replace(user.getUserId(),user);
         else
-            throw new DALException("\n" + "Brugeren eksistet ikke");
+            throw new DALException("Brugeren eksistet ikke");
     }
 
     @Override
@@ -46,6 +46,6 @@ public class UserDAONonPersistent implements IUserDAO {
         if (data.getUsers().containsKey(userId))
             data.getUsers().remove(userId);
         else
-            throw new DALException("\n" + "Brugeren eksisterer ikke");
+            throw new DALException("Brugeren eksisterer ikke");
     }
 }

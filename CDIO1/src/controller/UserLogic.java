@@ -21,11 +21,12 @@ public class UserLogic {
         
         int choice;
         
-        outer:
-        while(true){
+        //Until the user terminates program
+        outer: while(true){
             
             choice = tui.showMenu("Vælg et menupunkt", "Opret ny bruger", "List brugere", "Ret bruger","Slet bruger", "Afslut program");
     
+            //Based on menu choice
             switch (choice){
                 case 1:
                     createUser();
@@ -46,6 +47,7 @@ public class UserLogic {
         }
     }
     
+    //Asks tui to create a new user and dao to save it
     private void createUser(){
         try {
             dao.createUser(tui.createUser());
@@ -54,6 +56,7 @@ public class UserLogic {
         }
     }
     
+    //Asks dao for full userlist and tui to display it
     private void ListUsers(){
         try {
             tui.listUsers(dao.getData());
@@ -62,39 +65,54 @@ public class UserLogic {
         }
     }
     
+    //Enables a user to edit the user database
     private void editUser(){
     
+        //Input ID
         int id = tui.getUserID();
         
         try{
+            //Check if ID is in database
             validateID(id);
             UserDTO userDTO = dao.getUser(id);
             
+            //Show user options
             int choice = tui.showMenu("Vælg hvad du vil redigere", "Navn", "Brugernavn", "Kodeord", "Roller");
             
+            //Based on menu choice
             switch (choice){
+                
+                //Edit name
                 case 1:
                     String newName = tui.inputName();
                     userDTO.setUserName(newName);
                     break;
+                    
+                //Edit username
                 case 2:
                     String newIni = tui.inputInit();
                     userDTO.setIni(newIni);
                     break;
+                    
+                //Edit password
                 case 3:
                     try{
                         String newPassword = tui.inputString("Skriv nyt kodeord: ");
                         functionality.verifyPassword(userDTO, newPassword);
                         userDTO.setPassword(newPassword);
-                        
                     }catch(Exception e) {
                         System.out.println("\n" + e.getMessage());
                     }
                     break;
+                    
+                //Edit roles
                 case 4:
                     tui.addRolesToUser(userDTO);
                     break;
             }
+            
+            //Save edit
+            dao.updateUser(userDTO);
             
         } catch(userIDNotFound e){
             System.out.println("\n" + e.getMessage());

@@ -88,10 +88,17 @@ public class UserDTO implements Serializable{
 	 * @param role
 	 * @return true if role existed, false if not
 	 */
-	public boolean removeRole(String role){
-		return this.roles.remove(role);
+	public void removeRole(String role){
+		this.roles.remove(role);
 	}
-
+	
+	public void removeRoles(){
+		removeRole("Admin");
+		removeRole("Pharmacist");
+		removeRole("Foreman");
+		removeRole("Operator");
+	}
+	
 	public static int getCounter() {
 		return counter;
 	}

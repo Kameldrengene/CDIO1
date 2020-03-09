@@ -109,6 +109,11 @@ public class TUI {
         String inp = "";
         System.out.println("\n" + "Vælg Roler (skriv tallene for alle de roller brugeren skal have på samme linje):");
         System.out.println("1:Admin, 2:Pharmacist, 3:Foreman, 4:Operator");
+        
+        //Remove previously attached roles to user
+        user.removeRoles();
+        
+        //Let user choose new roles and add them
         inp = scan.nextLine();
         for (int i = 0; i < inp.length(); i++) { // Will not be able to have more than 10 different roles this way.
             try {

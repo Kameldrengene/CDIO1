@@ -1,6 +1,6 @@
 package dal;
 
-import Services.DatabaseIO;
+import Services.SQLDatabaseIO;
 import dto.UserDTO;
 
 import java.sql.ResultSet;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserDAOSQL implements IUserDAO {
-    DatabaseIO db = new DatabaseIO("kameldrenge", "Cea9YS0ON6lwQmx", "db4free.net");
+    SQLDatabaseIO db = new SQLDatabaseIO("kameldrenge", "Cea9YS0ON6lwQmx", "db4free.net");
 
     @Override
     public UserDTO getUser(int userId) throws DALException {

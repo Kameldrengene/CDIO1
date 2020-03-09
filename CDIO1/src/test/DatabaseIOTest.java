@@ -1,13 +1,13 @@
 package test;
 
-import Services.DatabaseIO;
+import Services.SQLDatabaseIO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DatabaseIOTest {
     public static void main(String[] args) {
-        DatabaseIO db = new DatabaseIO("root","root","localhost");{
+        SQLDatabaseIO db = new SQLDatabaseIO("root","root","localhost");{
             db.update("CREATE DATABASE CDIO_DB_TEST;");
             db.update("DROP DATABASE cdio_db_test;");
             db.query("use university;");

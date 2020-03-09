@@ -2,7 +2,7 @@ package Services;
 
 import java.sql.*;
 
-public class DatabaseIO {
+public class SQLDatabaseIO {
     private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private String DatabaseURL;
     private String USER;
@@ -13,7 +13,7 @@ public class DatabaseIO {
     private Statement stmt = null;
 
 
-    public DatabaseIO(String USER, String PASSWORD, String URL) {
+    public SQLDatabaseIO(String USER, String PASSWORD, String URL) {
         this.USER = USER;
         this.PASS = PASSWORD;
         this.DatabaseURL = "jdbc:mysql://" + URL + ":3306/";
