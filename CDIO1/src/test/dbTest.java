@@ -33,5 +33,11 @@ public class dbTest {
         }
 
         System.out.println(userDTO.getIni());
+        try {
+            user2.deleteUser(5);
+            System.out.println(user2.getUser(5).getIni());
+        } catch (IUserDAO.DALException e) {
+            e.printStackTrace();
+        }
     }
 }
