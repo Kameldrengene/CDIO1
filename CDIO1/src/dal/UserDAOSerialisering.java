@@ -16,7 +16,7 @@ public class UserDAOSerialisering implements IUserDAO{
     
     public UserDAOSerialisering(){
         data = readUserList();
-        if(data ==null){
+        if(data.getUsers() ==null){
             writeUserList(new MapSerialisering());
             readUserList();
         }
