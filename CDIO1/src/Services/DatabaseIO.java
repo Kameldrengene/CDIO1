@@ -13,10 +13,10 @@ public class DatabaseIO {
     private Statement stmt = null;
 
 
-    public DatabaseIO(String USER, String PASSWORD, String URL) {
+    public DatabaseIO(String USER, String PASSWORD, String URL, int PORT) {
         this.USER = USER;
         this.PASS = PASSWORD;
-        this.DatabaseURL = "jdbc:mysql://" + URL + ":3306/";
+        this.DatabaseURL = "jdbc:mysql://" + URL + ":"+PORT+"/";
     }
 
     public void connect() {
