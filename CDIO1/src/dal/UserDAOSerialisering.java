@@ -41,6 +41,7 @@ public class UserDAOSerialisering implements IUserDAO{
             FileOutputStream fileOutputStream = new FileOutputStream("object2.ser");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(savethisList);
+            objectOutputStream.flush();
             fileOutputStream.close();
             objectOutputStream.close();
         }catch (Exception e){
