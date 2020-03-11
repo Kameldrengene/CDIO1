@@ -4,9 +4,9 @@ import controller.UserLogic;
 import dal.IUserDAO;
 import dal.UserDAONonPersistent;
 import dto.UserDTO;
-import functionality.Functionality;
-import functionality.IFunctionality;
-import tui.TUI;
+import bll.Functionality;
+import bll.IFunctionality;
+import pl.TUI;
 
 import java.util.List;
 

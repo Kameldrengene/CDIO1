@@ -2,17 +2,17 @@ import controller.UserLogic;
 import dal.UserDAONonPersistent;
 import dal.UserDAOSQL;
 import dal.UserDAOSerialisering;
-import functionality.Functionality;
-import functionality.IFunctionality;
-import tui.TUI;
+import bll.Functionality;
+import bll.IFunctionality;
+import pl.IUI;
+import pl.TUI;
 
 public class Main {
     
     public static void main(String[] args){
-        //TODO fix (lasse)
         
         //Initializing
-        TUI tui = new TUI();
+        IUI tui = new TUI();
         IFunctionality functionality = new Functionality();
         int choice = tui.showMenu("Vælg database", "Non-persistent", "Fil på disk", "SQL database");
         

@@ -1,6 +1,6 @@
 package test;
 
-import Services.SQLDatabaseIO;
+import services.SQLDatabaseIO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

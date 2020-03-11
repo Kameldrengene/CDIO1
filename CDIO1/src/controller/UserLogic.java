@@ -2,18 +2,16 @@ package controller;
 
 import dal.IUserDAO;
 import dto.UserDTO;
-import functionality.IFunctionality;
-import tui.TUI;
-
-import java.util.List;
+import bll.IFunctionality;
+import pl.IUI;
 
 public class UserLogic {
     
-    private TUI tui;
+    private IUI tui;
     private IFunctionality functionality;
     private IUserDAO dao;
     
-    public UserLogic(TUI tui, IFunctionality functionality, IUserDAO dao){
+    public UserLogic(IUI tui, IFunctionality functionality, IUserDAO dao){
         this.tui = tui;
         this.functionality = functionality;
         this.dao = dao;
@@ -24,7 +22,7 @@ public class UserLogic {
         int choice;
         
         //Until the user terminates program
-        outer: while(true){
+        while(true){
             
             choice = tui.showMenu("Vælg et menupunkt", "Opret ny bruger", "List brugere", "Ret bruger","Slet bruger", "Afslut program");
     
@@ -45,6 +43,7 @@ public class UserLogic {
                 case 5:
                     System.out.println("\n" + "Programmet lukkes...");
                     java.lang.System.exit(0); //Will exit the program with error code 0
+                    break;
             }
         }
     }
@@ -86,7 +85,7 @@ public class UserLogic {
             UserDTO userDTO = dao.getUser(id);
             
             //Show user options
-            int choice = tui.showMenu("Vælg hvad du vil redigere", "Navn", "Brugernavn", "Kodeord", "Roller");
+            int choice = tui.showMenu("Vælg hvad du vil redigere", "Navn", "Initialer", "Kodeord", "Roller");
             
             //Based on menu choice
             switch (choice){
@@ -138,6 +137,7 @@ public class UserLogic {
        int id = tui.getUserID();
        
        try{
+           //Check if ID is in database
            validateID(id);
            dao.deleteUser(id);
        } catch (userIDNotFound e){
@@ -147,9 +147,13 @@ public class UserLogic {
        }
     }
     
+    //Checks if ID is in database
     private void validateID(int ID) throws userIDNotFound{
         try {
+            //Get user IDs
             int[] IDs = functionality.getUserIDs(dao.getData());
+            
+            //Check if given ID is in IDs
             if( !(functionality.isUserIDPresent(ID, IDs)) )
                 throw new userIDNotFound("ID'et blev ikke fundet");
         } catch (IUserDAO.DALException e) {
@@ -157,8 +161,11 @@ public class UserLogic {
         }
     }
     
+    //Special exception to be thrown
     public class userIDNotFound extends Exception {
-        public userIDNotFound(String msg) { super(msg);}
+        public userIDNotFound(String msg) {
+            super(msg);
+        }
     }
     
 }
