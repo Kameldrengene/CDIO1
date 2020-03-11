@@ -1,6 +1,6 @@
 package dal;
 
-import Data.MapNonPersistent;
+import data.MapNonPersistent;
 import dto.UserDTO;
 
 import java.util.ArrayList;

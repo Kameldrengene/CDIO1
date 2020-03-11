@@ -1,11 +1,11 @@
-package tui;
+package pl;
 
 import dto.UserDTO;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class TUI {
+public class TUI implements IUI {
     
     private Scanner scan = new Scanner(System.in);
 
@@ -35,12 +35,11 @@ public class TUI {
             else
                 break;
         }
-        
         return choice;
     }
     
-    //Gets a number from the user
-    private int inputNumber(){
+    //Keeps prompting user for number until one is received
+    public int inputNumber(){
             int choice;
         
             while(true){
@@ -51,7 +50,6 @@ public class TUI {
                     System.out.println("\n" + "Indtast venligst et tal: ");
                 }
             }
-            
             return choice;
     }
 
@@ -135,7 +133,7 @@ public class TUI {
                         break;
                 }
             } catch (NumberFormatException e) {
-
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -166,6 +164,8 @@ public class TUI {
             System.out.println(list.get(i));
         }
     }
+    
+    //Keeps prompting user for an ID until a valid one has been entered
     public int getUserID(){
         
         System.out.println("\n" + "Indtast ID: ");
@@ -178,19 +178,12 @@ public class TUI {
             else
                 System.out.println("\n" + "Indtast et ID fra 11-99:");
         }
-        
         return id;
-
     }
     
-    public String outputString(String message){
-        System.out.println(message);
-        return scan.nextLine();
-    }
-    
+    //Displays a message and prompts user for string
     public String inputString(String message){
         System.out.println(message);
         return scan.nextLine();
     }
-    
 }

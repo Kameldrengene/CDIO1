@@ -1,6 +1,6 @@
 package dal;
 
-import Data.MapSerialisering;
+import data.MapSerialisering;
 import dto.UserDTO;
 
 import java.io.*;

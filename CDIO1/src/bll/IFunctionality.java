@@ -1,4 +1,4 @@
-package functionality;
+package bll;
 
 import dto.UserDTO;
 

@@ -1,15 +1,15 @@
-package functionality;
+package bll;
 
 import dto.UserDTO;
 
 import java.util.List;
 
 public class Functionality implements IFunctionality {
+   
     //                        !   +   -   .   =   ?   _
     private int[] specials = {33, 43, 45, 46, 61, 63, 95};
-
-
     
+    //Checks is given ID is present in IDs
     public boolean isUserIDPresent(int ID, int[] IDs){
         
         for (int i = 0; i < IDs.length; i++) {
@@ -18,6 +18,7 @@ public class Functionality implements IFunctionality {
         return false;
     }
     
+    //Returns all the user IDs in an int[]
     public int[] getUserIDs(List<UserDTO> users){
         
         int[] IDs = new int[users.size()];
@@ -29,7 +30,7 @@ public class Functionality implements IFunctionality {
     
     public boolean verifyPassword(UserDTO user, String pass) throws Exception {
         if (pass.length() < 6 || pass.length() > 50){ // length error
-            throw new Exception("\n" + "length error");
+            throw new Exception("Length error");
         }
         
         boolean lowercase = false;
@@ -65,7 +66,7 @@ public class Functionality implements IFunctionality {
             }
             
             if (!mathcing){ // not allowed symbol error
-                throw new Exception("\n" + "symbol error");
+                throw new Exception("Symbol error");
             }
             
             Boolean nameInPass = false;
@@ -77,7 +78,7 @@ public class Functionality implements IFunctionality {
             }
             
             if (pass.contains(Integer.toString(user.getUserId())) || nameInPass) {
-                throw new Exception("information in password error");
+                throw new Exception("Information in password error");
             }
         }
         
@@ -101,7 +102,7 @@ public class Functionality implements IFunctionality {
             return true;
         }
         else { //not enough categories included error
-            throw new Exception("\n" + "category error");
+            throw new Exception("Category error");
         }
     }
     
