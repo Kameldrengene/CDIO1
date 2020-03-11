@@ -20,7 +20,8 @@ public class SQLDatabaseIO {
     }
     public void setDB(String db){
         this.db_name = db;
-    }
+    } //Tells object what DB to use
+    //Try to connect to DB
     public void connect() {
         if(!connected){
             try {
@@ -37,26 +38,21 @@ public class SQLDatabaseIO {
                 connected=false;
                 e.printStackTrace();
             }
-        } else{
-            //System.out.println("Already connected");
         }
     }
+    //Runs update on mysql server.
     public void update(String query){
-        if(!connected){
-            //System.out.println("Connect to a DB first");
-        } else{
+        if(connected){
             try {
                 stmt = conn.createStatement();
                 stmt.executeUpdate("use "+db_name);
                 stmt.executeUpdate(query);
-                //System.out.println(query+" has been executed");
             } catch (SQLException e) {
-                //System.out.println(query+" failed to execute");
                 e.printStackTrace();
             }
         }
     }
-
+    //Runs query on mysql server, and returns ResultSet object.
     public ResultSet query(String query){
         ResultSet result = null;
         if(!connected){
@@ -66,9 +62,7 @@ public class SQLDatabaseIO {
                 stmt = conn.createStatement();
                 stmt.executeUpdate("use "+db_name);
                 result = stmt.executeQuery(query);
-//                System.out.println(query+" has been executed");
             } catch (SQLException e) {
-//                System.out.println(query+" failed to execute");
                 e.printStackTrace();
             }
         }
