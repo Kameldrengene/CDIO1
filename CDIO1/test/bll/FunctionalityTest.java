@@ -57,4 +57,131 @@ public class FunctionalityTest {
         assertArrayEquals(new int[]{13, 100, -1, 0}, func.getUserIDs(users));
         
     }
+
+    @Test
+    public void verifyPassword() {
+
+        UserDTO testUser = new UserDTO();
+        testUser.setUserId(11);
+        testUser.setUserName("Volkan");
+
+        int count = 0;
+
+        try {
+            func.verifyPassword(testUser, "Aa1");
+            System.out.println("Error");
+        } catch (Exception e) {
+            if (e.getMessage().equals("Length error")) {
+                count++;
+            }
+        }
+
+        try {
+            func.verifyPassword(testUser, "AAAAAAAAAAbbbbbbbbbbCCCCCCCCCCddddddddddEEEEEEEEEE!");
+            System.out.println("Error");
+        } catch (Exception e) {
+            if (e.getMessage().equals("Length error")) {
+                count++;
+            }
+        }
+
+        try {
+            func.verifyPassword(testUser, "Aa123aA¤");
+            System.out.println("Error");
+        } catch (Exception e) {
+            if (e.getMessage().equals("Symbol error")) {
+                count++;
+            }
+        }
+
+        try {
+            func.verifyPassword(testUser, "Aa123aA@");
+            System.out.println("Error");
+        } catch (Exception e) {
+            if (e.getMessage().equals("Symbol error")) {
+                count++;
+            }
+        }
+
+        try {
+            func.verifyPassword(testUser, "Aa123aA&");
+            System.out.println("Error");
+        } catch (Exception e) {
+            if (e.getMessage().equals("Symbol error")) {
+                count++;
+            }
+        }
+
+        try {
+            func.verifyPassword(testUser, "Volkan123");
+            System.out.println("Error");
+        } catch (Exception e) {
+            if (e.getMessage().equals("Information in password error")) {
+                count++;
+            }
+        }
+
+        try {
+            func.verifyPassword(testUser, "Aa11!23");
+            System.out.println("Error");
+        } catch (Exception e) {
+            if (e.getMessage().equals("Information in password error")) {
+                count++;
+            }
+        }
+
+        try {
+            func.verifyPassword(testUser, "AAAAAAAAAAAA");
+            System.out.println("Error");
+        } catch (Exception e) {
+            if (e.getMessage().equals("Category error")) {
+                count++;
+            }
+        }
+
+        try {
+            func.verifyPassword(testUser, "AAAAAAbbbbb");
+            System.out.println("Error");
+        } catch (Exception e) {
+            if (e.getMessage().equals("Category error")) {
+                count++;
+            }
+        }
+
+        try {
+            func.verifyPassword(testUser, "AAAAAA!!!!!");
+            System.out.println("Error");
+        } catch (Exception e) {
+            if (e.getMessage().equals("Category error")) {
+                count++;
+            }
+        }
+
+        try {
+            if (func.verifyPassword(testUser, "AAAbbb123")){
+                count++;
+            }
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
+
+        try {
+            if (func.verifyPassword(testUser, "AAAbbb123!.")){
+                count++;
+            }
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
+
+        try {
+            if (func.verifyPassword(testUser, "!+-.=?_aA")){
+                count++;
+            }
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
+
+
+        assertEquals(13, count);
+    }
 }

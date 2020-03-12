@@ -38,8 +38,8 @@ public class Functionality implements IFunctionality {
         boolean number = false;
         boolean symbol = false;
         
-        for (int i = 0; i < pass.length(); i++) {
-            int c = (int) pass.charAt(i);
+        for (int i = 0; i < pass.length(); i++) { //going through each character in pass
+            int c = (int) pass.charAt(i); //c is the ascii value of the char
             
             if (97 <= c && c <= 122){ //lowercase
                 lowercase = true;
@@ -68,18 +68,19 @@ public class Functionality implements IFunctionality {
             if (!mathcing){ // not allowed symbol error
                 throw new Exception("Symbol error");
             }
-            
-            Boolean nameInPass = false;
-            for (String name : user.getUserName().split(" ")) {
-                if (pass.contains(name)) {
-                    nameInPass = true;
-                    break;
-                }
+
+        }
+
+        Boolean nameInPass = false;
+        for (String name : user.getUserName().split(" ")) {
+            if (pass.contains(name)) {
+                nameInPass = true;
+                break;
             }
-            
-            if (pass.contains(Integer.toString(user.getUserId())) || nameInPass) {
-                throw new Exception("Information in password error");
-            }
+        }
+
+        if (pass.contains(Integer.toString(user.getUserId())) || nameInPass) {
+            throw new Exception("Information in password error");
         }
         
         int count = 0;
