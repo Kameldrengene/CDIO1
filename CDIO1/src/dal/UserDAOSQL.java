@@ -88,6 +88,9 @@ public class UserDAOSQL implements IUserDAO {
     public void createUser(UserDTO user) throws DALException { //We make a new user
         db.connect();
         db.update("insert into userdto (userID, userName, ini, cpr, password) VALUE ('" + user.getUserId() + "','" + user.getUserName() + "','" + user.getIni() + "','" + user.getCpr() + "','" + user.getPassword() + "')");
+        for(int i = 0; i < user.getRoles().size();i++){
+            db.update("insert into userdto_roles (userID,role_name) VALUE('"+user.getUserId()+"','"+user.getRoles().get(i)+"');");
+        }
         db.close();
     }
 
@@ -105,6 +108,10 @@ public class UserDAOSQL implements IUserDAO {
                 db.update("UPDATE userdto SET password = '" + user.getPassword() + "' WHERE (userID = '" + user.getUserId() + "');");
             }
             rs.close();
+            db.update("delete from userdto_roles where userID="+user.getUserId());
+            for(int i = 0; i < user.getRoles().size();i++){
+                db.update("insert into userdto_roles (userID,role_name) VALUE('"+user.getUserId()+"','"+user.getRoles().get(i)+"');");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -116,6 +123,7 @@ public class UserDAOSQL implements IUserDAO {
     public void deleteUser(int userId) throws DALException { //We delete user
         db.connect();
         db.update("delete from userdto where userID=" + userId);
+        db.update("delete from userdto_roles where userID="+userId);
         db.close();
     }
 }
