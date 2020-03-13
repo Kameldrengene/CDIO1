@@ -63,7 +63,7 @@ public class UserDAOSerialisering implements IUserDAO{
     @Override
     public void createUser(UserDTO user) throws DALException {
         if (data.getUsers().containsKey(user.getUserId())){
-            throw new DALException("\n" + "Bruger navn er optaget");
+            throw new DALException("\n" + "Bruger ID er optaget");
         }
         else {
             data.getUsers().put(user.getUserId(), user);
