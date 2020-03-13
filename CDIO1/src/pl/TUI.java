@@ -154,7 +154,9 @@ public class TUI implements IUI {
 
         newuser.setUserId(id+1);
 
-        UserDTO.setCounter(id+1);
+        System.out.println("¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤");
+        System.out.println("¤ Brugeren er oprettet ¤");
+        System.out.println("¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤");
 
         return newuser;
     }
